@@ -1,0 +1,142 @@
+.container {
+  min-height: 100vh;
+  background: #F5F5F5;
+}
+
+.header-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30rpx;
+  background: white;
+  margin-bottom: 20rpx;
+}
+
+.header-title {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+.btn-small {
+  padding: 12rpx 24rpx;
+  font-size: 24rpx;
+}
+
+.reminder-list {
+  padding: 20rpx;
+}
+
+.reminder-item {
+  background: white;
+  border-radius: 16rpx;
+  padding: 30rpx;
+  margin-bottom: 20rpx;
+  display: flex;
+  gap: 20rpx;
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.06);
+  position: relative;
+}
+
+.reminder-content {
+  flex: 1;
+}
+
+.reminder-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20rpx;
+}
+
+.reminder-title {
+  font-size: 30rpx;
+  font-weight: bold;
+  color: #333;
+  flex: 1;
+}
+
+.reminder-time {
+  font-size: 24rpx;
+  color: #999;
+}
+
+.reminder-body {
+  font-size: 28rpx;
+  color: #666;
+  line-height: 1.6;
+  margin-bottom: 20rpx;
+}
+
+.reminder-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.reminder-type {
+  font-size: 24rpx;
+  color: #999;
+  padding: 8rpx 16rpx;
+  background: #F5F5F5;
+  border-radius: 8rpx;
+}
+
+.reminder-actions {
+  display: flex;
+  gap: 20rpx;
+}
+
+.reminder-status {
+  margin-top: 8rpx;
+}
+
+.unread-dot {
+  width: 16rpx;
+  height: 16rpx;
+  background: #F56C6C;
+  border-radius: 8rpx;
+}
+
+.empty-state,
+.loading-state {
+  text-align: center;
+  padding: 120rpx 0;
+}
+
+.empty-icon,
+.loading-icon {
+  font-size: 120rpx;
+  margin-bottom: 20rpx;
+}
+
+.empty-text,
+.loading-text {
+  font-size: 28rpx;
+  color: #999;
+}
+
+.load-more {
+  text-align: center;
+  padding: 30rpx;
+}
+
+.btn {
+  background: #4A90E2;
+  color: white;
+  border: none;
+  padding: 16rpx 32rpx;
+  border-radius: 8rpx;
+  font-size: 28rpx;
+}
+
+.btn-text {
+  background: none;
+  color: #4A90E2;
+  padding: 8rpx 16rpx;
+  font-size: 24rpx;
+}
+
+.btn-danger {
+  color: #F56C6C;
+}

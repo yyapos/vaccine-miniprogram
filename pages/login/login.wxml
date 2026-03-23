@@ -1,0 +1,86 @@
+<view class="login-container">
+  <view class="login-content">
+    <!-- Logo和标题 -->
+    <view class="logo-section">
+      <view class="logo-icon">💉</view>
+      <view class="app-name">防预通</view>
+      <view class="app-desc">便捷预约 · 守护健康</view>
+    </view>
+
+    <!-- 用户信息输入 -->
+    <view class="info-section">
+      <!-- 头像选择 -->
+      <view class="info-item">
+        <view class="info-label">头像</view>
+        <button
+          class="avatar-btn"
+          open-type="chooseAvatar"
+          bindchooseavatar="onChooseAvatar"
+        >
+          <image class="avatar-image" src="{{avatar || '/assets/icons/profile.png'}}" mode="aspectFill"></image>
+          <view class="avatar-tip">点击选择头像</view>
+        </button>
+      </view>
+
+      <!-- 昵称输入 -->
+      <view class="info-item">
+        <view class="info-label">昵称</view>
+        <input
+          class="nickname-input"
+          type="nickname"
+          placeholder="请输入昵称"
+          value="{{nickname}}"
+          bindinput="onNicknameInput"
+          maxlength="20"
+        />
+      </view>
+
+      <!-- 性别选择 -->
+      <view class="info-item">
+        <view class="info-label">性别</view>
+        <radio-group class="radio-group" bindchange="onGenderChange">
+          <label class="radio-label {{gender == 1 ? 'active' : ''}}">
+            <radio value="1" checked="{{gender == 1}}" color="#4A90E2" />
+            <text>男</text>
+          </label>
+          <label class="radio-label {{gender == 2 ? 'active' : ''}}">
+            <radio value="2" checked="{{gender == 2}}" color="#4A90E2" />
+            <text>女</text>
+          </label>
+        </radio-group>
+      </view>
+
+      <!-- 城市选择 -->
+      <view class="info-item">
+        <view class="info-label">城市</view>
+        <picker mode="region" bindchange="onCityChange">
+          <view class="picker-box {{city ? 'selected' : ''}}">
+            <text>{{ cityName }}</text>
+            <text class="picker-arrow">›</text>
+          </view>
+        </picker>
+      </view>
+    </view>
+
+    <!-- 登录按钮 -->
+    <view class="action-section">
+      <button
+        class="login-btn"
+        open-type="getPhoneNumber"
+        bindgetphonenumber="onWxLogin"
+        disabled="{{!city || !nickname}}"
+      >
+        <text class="btn-icon">📱</text>
+        <text>微信一键登录</text>
+      </button>
+    </view>
+
+    <!-- 协议提示 -->
+    <view class="tips-section">
+      <text>登录即表示同意</text>
+      <text class="link">《用户协议》</text>
+      <text>和</text>
+      <text class="link">《隐私政策》</text>
+    </view>
+  </view>
+</view>

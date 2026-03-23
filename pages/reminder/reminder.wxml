@@ -1,0 +1,49 @@
+<view class="container">
+  <!-- 顶部操作栏 -->
+  <view class="header-actions">
+    <view class="header-title">接种提醒</view>
+    <button class="btn btn-small" bindtap="markAllRead" wx:if="{{ reminders.length > 0 }}">全部已读</button>
+  </view>
+
+  <!-- 提醒列表 -->
+  <view class="reminder-list">
+    <view wx:if="{{ reminders.length === 0 && !loading }}" class="empty-state">
+      <view class="empty-icon">🔔</view>
+      <view class="empty-text">暂无提醒通知</view>
+    </view>
+    
+    <view wx:elif="{{ reminders.length === 0 && loading }}" class="loading-state">
+      <view class="loading-icon">⏳</view>
+      <view class="loading-text">加载中...</view>
+    </view>
+
+    <view class="reminder-item" wx:for="{{ reminders }}" wx:key="id">
+      <view class="reminder-content">
+        <view class="reminder-header">
+          <view class="reminder-title">{{ item.title }}</view>
+          <view class="reminder-time">{{ item.createTime }}</view>
+        </view>
+        <view class="reminder-body">{{ item.content }}</view>
+        <view class="reminder-footer">
+          <view class="reminder-type">{{ item.reminderType }}</view>
+          <view class="reminder-actions">
+            <button class="btn btn-text" bindtap="markAsRead" data-id="{{ item.id }}" wx:if="{{ item.status === 1 }}">
+              标记已读
+            </button>
+            <button class="btn btn-text btn-danger" bindtap="deleteReminder" data-id="{{ item.id }}">
+              删除
+            </button>
+          </view>
+        </view>
+      </view>
+      <view class="reminder-status" wx:if="{{ item.status === 1 }}">
+        <view class="unread-dot"></view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 加载更多 -->
+  <view wx:if="{{ loading && reminders.length > 0 }}" class="load-more">
+    <view class="loading-text">加载中...</view>
+  </view>
+</view>

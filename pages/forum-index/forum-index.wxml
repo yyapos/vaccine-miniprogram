@@ -1,0 +1,116 @@
+<view class="container">
+  <!-- 公告区域 -->
+  <view class="announcement-section" wx:if="{{ announcements.length > 0 }}">
+    <view class="announcement-title">📢 论坛公告</view>
+    <swiper 
+      class="announcement-swiper"
+      autoplay="{{ announcements.length > 1 }}"
+      interval="3000"
+      duration="500"
+      circular="{{ announcements.length > 1 }}"
+      vertical="{{ announcements.length > 1 }}"
+      display-multiple-items="1">
+      <swiper-item
+        wx:for="{{ announcements }}"
+        wx:key="id"
+        class="announcement-swiper-item"
+        bindtap="viewPostDetail"
+        data-id="{{ item.id }}"
+        data-type="announcement">
+        <view class="announcement-item">
+          <text class="announcement-tag">{{ item.type }}</text>
+          <text class="announcement-text">{{ item.title }}</text>
+        </view>
+      </swiper-item>
+    </swiper>
+  </view>
+
+  <!-- 搜索和操作区域 -->
+  <view class="search-actions">
+    <view class="search-box">
+      <input
+        class="search-input"
+        placeholder="搜索帖子..."
+        value="{{ keyword }}"
+        bindinput="onSearchInput"
+        bindconfirm="onSearch"
+      />
+      <text class="search-icon" bindtap="onSearch">🔍</text>
+    </view>
+    <view class="action-item" bindtap="createPost">
+      <view class="action-icon">✍️</view>
+      <view class="action-name">发表</view>
+    </view>
+  </view>
+
+  <!-- 帖子列表 -->
+  <view class="posts-section">
+    <view class="section-header">
+      <view class="section-title">帖子列表</view>
+      <view class="sort-tabs">
+        <view
+          class="sort-tab {{ sortBy === 'latest' ? 'active' : '' }}"
+          bindtap="switchSort"
+          data-sort="latest">
+          最新
+        </view>
+        <view
+          class="sort-tab {{ sortBy === 'hot' ? 'active' : '' }}"
+          bindtap="switchSort"
+          data-sort="hot">
+          最热
+        </view>
+      </view>
+    </view>
+    
+    <view wx:if="{{ posts.length === 0 && !loading }}" class="empty-state">
+      <view class="empty-icon">📝</view>
+      <view class="empty-text">暂无帖子</view>
+      <button class="btn btn-primary" bindtap="createPost">发布第一个帖子</button>
+    </view>
+    
+    <view wx:elif="{{ posts.length === 0 && loading }}" class="loading-state">
+      <view class="loading-icon">⏳</view>
+      <view class="loading-text">加载中...</view>
+    </view>
+
+    <view class="post-list">
+      <view class="post-item" wx:for="{{ posts }}" wx:key="id" bindtap="viewPostDetail" data-id="{{ item.id }}">
+        <view class="post-header">
+          <view class="post-author">
+            <image class="author-avatar" src="{{ item.userAvatar || '/assets/default-avatar.png' }}" mode="aspectFill"></image>
+            <view class="author-info">
+              <view class="author-name">{{ item.nickname }}</view>
+              <view class="post-time">{{ item.createTime }}</view>
+            </view>
+          </view>
+        </view>
+        
+        <view class="post-title">{{ item.title }}</view>
+        <view class="post-content">{{ item.content }}</view>
+        
+        <view class="post-footer">
+          <view class="post-stats">
+            <view class="stat-item">
+              <text class="stat-icon">👁️</text>
+              <text class="stat-text">{{ item.viewCount || 0 }}</text>
+            </view>
+            <view class="stat-item">
+              <text class="stat-icon">👍</text>
+              <text class="stat-text">{{ item.likeCount || 0 }}</text>
+            </view>
+            <view class="stat-item">
+              <text class="stat-icon">💬</text>
+              <text class="stat-text">{{ item.commentCount || 0 }}</text>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 加载更多 -->
+  <view wx:if="{{ loading && posts.length > 0 }}" class="load-more">
+    <view class="loading-text">加载中...</view>
+  </view>
+</view>

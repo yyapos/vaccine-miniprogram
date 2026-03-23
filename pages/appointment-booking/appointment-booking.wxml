@@ -1,0 +1,68 @@
+<view class="container">
+  <view class="form-card">
+    <view class="form-title">疫苗预约</view>
+    
+    <!-- 儿童信息 -->
+    <view class="info-section">
+      <view class="section-title">儿童信息</view>
+      <view class="info-item">
+        <text class="info-label">姓名：</text>
+        <text class="info-value">{{ child ? child.name : '加载中...' }}</text>
+      </view>
+      <view class="info-item">
+        <text class="info-label">性别：</text>
+        <text class="info-value">{{ child ? (child.gender === 1 ? '男' : '女') : '加载中...' }}</text>
+      </view>
+      <view class="info-item">
+        <text class="info-label">出生日期：</text>
+        <text class="info-value">{{ child ? child.birthDate : '加载中...' }}</text>
+      </view>
+    </view>
+
+    <!-- 疫苗信息 -->
+    <view class="info-section">
+      <view class="section-title">疫苗信息</view>
+      <view class="info-item">
+        <text class="info-label">疫苗名称：</text>
+        <text class="info-value">{{ vaccine ? vaccine.name : '加载中...' }}</text>
+      </view>
+      <view class="info-item">
+        <text class="info-label">生产厂家：</text>
+        <text class="info-value">{{ vaccine ? vaccine.manufacturer : '加载中...' }}</text>
+      </view>
+      <view class="info-item">
+        <text class="info-label">接种次数：</text>
+        <text class="info-value">{{ vaccine ? vaccine.doseNumber + ' 次' : '加载中...' }}</text>
+      </view>
+      <view class="info-item">
+        <text class="info-label">间隔天数：</text>
+        <text class="info-value">{{ vaccine ? vaccine.intervalDays + ' 天' : '加载中...' }}</text>
+      </view>
+    </view>
+
+    <!-- 预约信息 -->
+    <view class="form-section">
+      <view class="section-title">预约信息</view>
+      
+      <view class="form-item">
+        <view class="form-label">接种次数 <text class="required">*</text></view>
+        <picker mode="selector" range="{{ doseOptions }}" range-key="name" value="{{ doseNumber - 1 }}" bindchange="onDoseChange">
+          <view class="picker-input">{{ doseOptions[doseNumber - 1] ? doseOptions[doseNumber - 1].name : '请选择接种次数' }}</view>
+        </picker>
+      </view>
+      
+      <view class="form-item">
+        <view class="form-label">预约日期 <text class="required">*</text></view>
+        <picker mode="date" start="{{ minDate }}" value="{{ scheduledDate }}" bindchange="onDateChange">
+          <view class="picker-input">{{ scheduledDate || '请选择预约日期' }}</view>
+        </picker>
+      </view>
+    </view>
+
+    <!-- 提交按钮 -->
+    <view class="form-actions">
+      <button class="btn btn-secondary" bindtap="handleCancel">取消</button>
+      <button class="btn btn-primary" bindtap="handleSubmit" loading="{{ loading }}">确认预约</button>
+    </view>
+  </view>
+</view>

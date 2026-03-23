@@ -1,0 +1,104 @@
+.container {
+  padding: 20rpx;
+  padding-bottom: 120rpx;
+}
+
+.search-bar {
+  margin-bottom: 20rpx;
+}
+
+.search-input {
+  width: 100%;
+  padding: 20rpx;
+  background: white;
+  border-radius: 12rpx;
+  border: 1rpx solid #E0E0E0;
+}
+
+.child-list {
+  margin-bottom: 20rpx;
+}
+
+.child-item {
+  background: white;
+  border-radius: 8rpx;
+  padding: 24rpx;
+  margin-bottom: 16rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 1rpx 4rpx rgba(0, 0, 0, 0.05);
+}
+
+.child-info {
+  flex: 1;
+}
+
+.child-name {
+  font-size: 30rpx;
+  font-weight: 400;
+  color: #333;
+  margin-bottom: 10rpx;
+}
+
+.child-details {
+  font-size: 24rpx;
+  color: #999;
+}
+
+.separator {
+  margin: 0 10rpx;
+}
+
+.key-tag {
+  display: inline-block;
+  padding: 4rpx 10rpx;
+  background: #FDF6EC;
+  color: #E6A23C;
+  border-radius: 4rpx;
+  font-size: 20rpx;
+  margin-top: 8rpx;
+}
+
+.child-actions {
+  display: flex;
+  gap: 10rpx;
+}
+
+.action-btn {
+  padding: 12rpx 20rpx;
+  border-radius: 6rpx;
+  font-size: 24rpx;
+}
+
+.edit-btn {
+  background: #ECF5FF;
+  color: #409EFF;
+}
+
+.delete-btn {
+  background: #FEF0F0;
+  color: #F56C6C;
+}
+
+.add-btn {
+  position: fixed;
+  bottom: 40rpx;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #4A90E2;
+  color: white;
+  padding: 20rpx 48rpx;
+  border-radius: 8rpx;
+  display: flex;
+  align-items: center;
+  gap: 10rpx;
+  box-shadow: 0 2rpx 8rpx rgba(74, 144, 226, 0.3);
+  font-size: 28rpx;
+  font-weight: 400;
+}
+
+.add-icon {
+  font-size: 32rpx;
+  font-weight: 400;
+}

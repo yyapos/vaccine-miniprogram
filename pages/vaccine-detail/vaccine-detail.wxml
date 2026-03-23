@@ -1,0 +1,55 @@
+<view class="container">
+  <view class="detail-card">
+    <!-- 疫苗基本信息 -->
+    <view class="vaccine-header">
+      <view class="vaccine-name">{{ vaccine ? vaccine.name : '加载中...' }}</view>
+      <view class="vaccine-code">编码：{{ vaccine ? vaccine.code : '加载中...' }}</view>
+    </view>
+
+    <!-- 库存状态 -->
+    <view class="stock-section">
+      <view class="stock-label">库存状态</view>
+      <view class="stock-status {{ stockClass }}">{{ stockText }}</view>
+      <view class="stock-count">剩余：{{ vaccine ? vaccine.stock : 0 }} 剂</view>
+    </view>
+
+    <!-- 详细信息 -->
+    <view class="info-section">
+      <view class="section-title">详细信息</view>
+      
+      <view class="info-item">
+        <text class="info-label">生产厂家</text>
+        <text class="info-value">{{ vaccine ? vaccine.manufacturer : '加载中...' }}</text>
+      </view>
+      
+      <view class="info-item">
+        <text class="info-label">接种次数</text>
+        <text class="info-value">{{ vaccine ? vaccine.doseNumber : '加载中...' }} 次</text>
+      </view>
+      
+      <view class="info-item">
+        <text class="info-label">间隔天数</text>
+        <text class="info-value">{{ vaccine ? vaccine.intervalDays : '加载中...' }} 天</text>
+      </view>
+      
+      <view class="info-item" wx:if="{{ vaccine && vaccine.expiryDate }}">
+        <text class="info-label">有效期</text>
+        <text class="info-value">{{ vaccine.expiryDate }}</text>
+      </view>
+    </view>
+
+    <!-- 疫苗说明 -->
+    <view class="desc-section" wx:if="{{ vaccine && vaccine.description }}">
+      <view class="section-title">疫苗说明</view>
+      <view class="desc-content">{{ vaccine.description }}</view>
+    </view>
+
+    <!-- 操作按钮 -->
+    <view class="action-buttons">
+      <button class="btn btn-back" bindtap="goBack">返回列表</button>
+      <button class="btn btn-book" bindtap="bookNow" disabled="{{ vaccine && vaccine.stock === 0 }}">
+        {{ vaccine && vaccine.stock === 0 ? '缺货' : '立即预约' }}
+      </button>
+    </view>
+  </view>
+</view>

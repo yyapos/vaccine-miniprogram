@@ -1,0 +1,40 @@
+<view class="container">
+  <view class="child-select" wx:if="{{ children.length > 0 }}"> <text class="select-label">为谁预约：</text>
+    <picker mode="selector" range="{{ children}}" range-key="name" value="{{ selectedChildIndex}}"
+      bindchange="selectChild">
+      <view class="picker-view"> <text>{{ children[selectedChildIndex].name }}</text> <text class="arrow">▼</text>
+      </view>
+    </picker>
+  </view>
+  <view class="vaccine-list">
+    <view wx:if="{{ vaccines.length === 0}}" class="empty-state">
+      <view class="empty-icon">💉</view>
+      <view class="empty-text">暂无疫苗信息</view>
+    </view>
+    <view wx:elif="{{ children.length === 0}}" class="empty-state">
+      <view class="empty-icon">👶</view>
+      <view class="empty-text">请先添加儿童</view> <button class="btn btn-primary" bindtap="navigateToChild">添加儿童</button>
+    </view>
+    <view class="vaccine-item" wx:for="{{ vaccines}}" wx:key="id">
+      <view class="vaccine-header">
+        <view class="vaccine-name">{{ item.name }}</view>
+        <view class="vaccine-code">{{ item.code }}</view>
+      </view>
+      <view class="vaccine-info">
+        <view class="info-row"> <text class="info-label">生产厂家：</text> <text
+            class="info-value">{{ item.manufacturer }}</text> </view>
+        <view class="info-row"> <text class="info-label">接种次数：</text> <text class="info-value">{{ item.doseNumber }}
+            次</text> </view>
+        <view class="info-row"> <text class="info-label">间隔天数：</text> <text class="info-value">{{ item.intervalDays }}
+            天</text> </view>
+        <view class="info-row"> <text class="info-label">库存状态：</text> <text
+            class="info-value stock {{ getStockClass(item.stock)}}">{{ getStockText(item.stock) }}</text> <text
+            class="stock-count">({{ item.stock }})</text> </view>
+      </view>
+      <view class="vaccine-actions"> <button class="btn btn-detail" bindtap="viewVaccineDetail"
+          data-id="{{ item.id }}">查看详情</button> <button class="btn btn-book" bindtap="bookVaccine"
+          data-id="{{ item.id }}" disabled="{{ item.stock === 0 }}"> {{ item.stock === 0 ? '缺货' : '立即预约' }} </button>
+      </view>
+    </view>
+  </view>
+</view>

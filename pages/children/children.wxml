@@ -1,0 +1,37 @@
+<view class="container">
+  <!-- 搜索栏 -->
+  <view class="search-bar">
+    <input class="search-input" placeholder="搜索儿童姓名" bindinput="onSearchInput" value="{{ searchKeyword}}" />
+  </view>
+
+  <!-- 儿童列表 -->
+  <view class="child-list">
+    <view wx:if="{{ children.length === 0}}" class="empty-state">
+      <view class="empty-icon">👶</view>
+      <view class="empty-text">暂无儿童信息</view>
+      <button class="btn btn-primary mt-20" bindtap="addChild">添加第一个孩子</button>
+    </view>
+    
+    <view class="child-item" wx:for="{{ filteredChildren }}" wx:key="id" bindtap="viewChild" data-id="{{ item.id }}">
+      <view class="child-info">
+        <view class="child-name">{{ item.name }}</view>
+        <view class="child-details">
+          <text>{{ item.gender === 1 ? '男' : '女' }}</text>
+          <text class="separator">|</text>
+          <text>{{ item.birthDate }}</text>
+        </view>
+        <view wx:if="{{ item.isKeyChild === 1}}" class="key-tag">重点儿童</view>
+      </view>
+      <view class="child-actions">
+        <view class="action-btn edit-btn" bindtap="editChild" data-id="{{ item.id }}" catchtap="stopEvent">编辑</view>
+        <view class="action-btn delete-btn" bindtap="deleteChild" data-id="{{ item.id }}" catchtap="stopEvent">删除</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 添加按钮 -->
+  <view class="add-btn" bindtap="addChild">
+    <text class="add-icon">+</text>
+    <text>添加儿童</text>
+  </view>
+</view>

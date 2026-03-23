@@ -1,0 +1,123 @@
+<view class="container">
+  <!-- 加载中 -->
+  <view wx:if="{{ loading }}" class="loading-state">
+    <view class="loading-icon">⏳</view>
+    <view class="loading-text">加载中...</view>
+  </view>
+
+  <!-- 预约详情 -->
+  <view wx:else>
+    <!-- 状态卡片 -->
+    <view class="status-card status-{{ appointment.status }}">
+      <view class="status-icon">{{ appointment.status === 0 ? '⏳' : appointment.status === 1 ? '✅' : appointment.status === 2 ? '❌' : '✅' }}</view>
+      <view class="status-text">{{ appointment.status === 0 ? '待审核' : appointment.status === 1 ? '已通过' : appointment.status === 2 ? '已拒绝' : '已完成' }}</view>
+    </view>
+
+    <!-- 预约信息 -->
+    <view class="card">
+      <view class="card-title">预约信息</view>
+      <view class="info-item">
+        <view class="info-label">预约编号</view>
+        <view class="info-value">#{{ appointment.id }}</view>
+      </view>
+      <view class="info-item">
+        <view class="info-label">预约时间</view>
+        <view class="info-value">{{ appointment.appointmentDate }}</view>
+      </view>
+      <view class="info-item" wx:if="{{ appointment.timeSlot }}">
+        <view class="info-label">时间段</view>
+        <view class="info-value">{{ appointment.timeSlot }}</view>
+      </view>
+      <view class="info-item">
+        <view class="info-label">剂次</view>
+        <view class="info-value">第{{ appointment.doseNumber }}剂</view>
+      </view>
+    </view>
+
+    <!-- 儿童信息 -->
+    <view class="card" bindtap="viewChildInfo">
+      <view class="card-title">儿童信息</view>
+      <view class="info-item">
+        <view class="info-label">姓名</view>
+        <view class="info-value">{{ appointment.childName }}</view>
+      </view>
+      <view class="info-item" wx:if="{{ appointment.childBirthDate }}">
+        <view class="info-label">出生日期</view>
+        <view class="info-value">{{ appointment.childBirthDate }}</view>
+      </view>
+      <view class="info-item" wx:if="{{ appointment.childGender }}">
+        <view class="info-label">性别</view>
+        <view class="info-value">{{ appointment.childGender === 1 ? '男' : '女' }}</view>
+      </view>
+      <view class="view-more">查看详情 ></view>
+    </view>
+
+    <!-- 疫苗信息 -->
+    <view class="card" bindtap="viewVaccineInfo">
+      <view class="card-title">疫苗信息</view>
+      <view class="info-item">
+        <view class="info-label">疫苗名称</view>
+        <view class="info-value">{{ appointment.vaccineName }}</view>
+      </view>
+      <view class="info-item" wx:if="{{ appointment.vaccineManufacturer }}">
+        <view class="info-label">生产厂家</view>
+        <view class="info-value">{{ appointment.vaccineManufacturer }}</view>
+      </view>
+      <view class="info-item" wx:if="{{ appointment.vaccineCategory }}">
+        <view class="info-label">疫苗类别</view>
+        <view class="info-value">{{ appointment.vaccineCategory }}</view>
+      </view>
+      <view class="view-more">查看详情 ></view>
+    </view>
+
+    <!-- 审核信息 -->
+    <view class="card" wx:if="{{ appointment.status === 1 || appointment.status === 2 }}">
+      <view class="card-title">审核信息</view>
+      <view class="info-item">
+        <view class="info-label">审核结果</view>
+        <view class="info-value">{{ appointment.status === 1 ? '通过' : '拒绝' }}</view>
+      </view>
+      <view class="info-item" wx:if="{{ appointment.cancelReason }}">
+        <view class="info-label">{{ appointment.status === 2 ? '拒绝原因' : '备注' }}</view>
+        <view class="info-value">{{ appointment.cancelReason }}</view>
+      </view>
+      <view class="info-item" wx:if="{{ appointment.updateTime }}">
+        <view class="info-label">审核时间</view>
+        <view class="info-value">{{ appointment.updateTime }}</view>
+      </view>
+    </view>
+
+    <!-- 接种信息 -->
+    <view class="card" wx:if="{{ appointment.status === 3 }}">
+      <view class="card-title">接种信息</view>
+      <view class="info-item">
+        <view class="info-label">接种时间</view>
+        <view class="info-value">{{ appointment.vaccinatedDate }}</view>
+      </view>
+      <view class="info-item" wx:if="{{ appointment.vaccinationSite }}">
+        <view class="info-label">接种地点</view>
+        <view class="info-value">{{ appointment.vaccinationSite }}</view>
+      </view>
+      <view class="info-item" wx:if="{{ appointment.batchNumber }}">
+        <view class="info-label">批次号</view>
+        <view class="info-value">{{ appointment.batchNumber }}</view>
+      </view>
+    </view>
+
+    <!-- 操作按钮 -->
+    <view class="action-buttons">
+      <button 
+        wx:if="{{ appointment.status === 0 }}" 
+        class="btn btn-danger" 
+        bindtap="cancelAppointment">
+        取消预约
+      </button>
+      <button 
+        wx:if="{{ appointment.status === 2 || appointment.status === 4 }}" 
+        class="btn btn-primary" 
+        bindtap="rebookAppointment">
+        重新预约
+      </button>
+    </view>
+  </view>
+</view>

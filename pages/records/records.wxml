@@ -1,0 +1,60 @@
+﻿<view class="container">
+<view class="child-selector" wx:if="{{ children.length > 0 }}">
+  <picker mode="selector" range="{{ children}}" range-key="name" value="{{ selectedChildIndex}}" bindchange="selectChild">
+    <view class="selector-content">
+      <text class="selector-text">{{ children[selectedChildIndex].name }}</text>
+      <text class="selector-arrow">▼</text>
+    </view>
+  </picker>
+</view>
+<view class="records-list">
+  <view wx:if="{{ children.length === 0}}" class="empty-state">
+    <view class="empty-icon">👶</view>
+    <view class="empty-text">暂无儿童信息</view>
+    <button class="btn btn-primary" bindtap="navigateToChild">添加儿童</button>
+  </view>
+  <view wx:elif="{{ records.length === 0}}" class="empty-state">
+    <view class="empty-icon">📋</view>
+    <view class="empty-text">暂无预约记录</view>
+    <button class="btn btn-primary" bindtap="navigateToAppointment">立即预约</button>
+  </view>
+  <view class="record-item" wx:for="{{ records}}" wx:key="id">
+    <view class="record-header">
+      <view class="record-vaccine">{{ item.vaccineName }}</view>
+      <view class="record-status {{ item.statusClass }}">{{ item.statusText }}</view>
+    </view>
+    <view class="record-info">
+      <view class="info-tag">
+        <text class="tag-icon">👶</text>
+        <text class="tag-text">{{ item.childName }}</text>
+      </view>
+      <view class="info-tag" wx:if="{{ item.doseNumber }}">
+        <text class="tag-icon">💉</text>
+        <text class="tag-text">第 {{ item.doseNumber }} 剂</text>
+      </view>
+      <view class="info-tag" wx:if="{{ item.manufacturer }}">
+        <text class="tag-icon">🏭</text>
+        <text class="tag-text">{{ item.manufacturer }}</text>
+      </view>
+    </view>
+    <view class="record-details">
+      <view class="detail-item">
+        <text class="detail-label">预约日期：</text>
+        <text class="detail-value">{{ item.appointmentDate }}</text>
+      </view>
+      <view class="detail-item" wx:if="{{ item.timeSlot }}">
+        <text class="detail-label">时间段：</text>
+        <text class="detail-value">{{ item.timeSlot }}</text>
+      </view>
+      <view class="detail-item" wx:if="{{ item.notes }}">
+        <text class="detail-label">备注：</text>
+        <text class="detail-value">{{ item.notes }}</text>
+      </view>
+      <view class="detail-item" wx:if="{{ item.cancelReason }}">
+        <text class="detail-label">取消原因：</text>
+        <text class="detail-value">{{ item.cancelReason }}</text>
+      </view>
+    </view>
+  </view>
+</view>
+</view>

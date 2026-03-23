@@ -1,0 +1,50 @@
+<view class="container">
+  <view class="form-card">
+    <view class="form-title">添加儿童信息</view>
+    
+    <view class="form-item">
+      <view class="form-label">姓名 <text class="required">*</text></view>
+      <input class="form-input" placeholder="请输入儿童姓名" value="{{ child.name }}" bindinput="onNameInput" />
+    </view>
+    
+    <view class="form-item">
+      <view class="form-label">性别 <text class="required">*</text></view>
+      <picker mode="selector" range="{{ genderOptions }}" value="{{ genderIndex }}" bindchange="onGenderChange">
+        <view class="picker-input">{{ genderOptions[genderIndex] || '请选择性别' }}</view>
+      </picker>
+    </view>
+    
+    <view class="form-item">
+      <view class="form-label">出生日期 <text class="required">*</text></view>
+      <picker mode="date" value="{{ child.birthDate }}" end="{{ today }}" bindchange="onBirthDateChange">
+        <view class="picker-input">{{ child.birthDate || '请选择出生日期' }}</view>
+      </picker>
+    </view>
+    
+    <view class="form-item">
+      <view class="form-label">身份证号</view>
+      <input class="form-input" placeholder="请输入身份证号" value="{{ child.idCard }}" bindinput="onIdCardInput" />
+    </view>
+    
+    <view class="form-item">
+      <view class="form-label">家庭住址</view>
+      <input class="form-input" placeholder="请输入家庭住址" value="{{ child.address }}" bindinput="onAddressInput" />
+    </view>
+    
+    <view class="form-item">
+      <view class="form-label">重点儿童</view>
+      <switch checked="{{ child.isKeyChild }}" bindchange="onKeyChildChange" />
+      <text class="form-desc">如早产儿、低体重儿等特殊情况</text>
+    </view>
+    
+    <view class="form-item" wx:if="{{ child.isKeyChild }}">
+      <view class="form-label">重点原因</view>
+      <input class="form-input" placeholder="请输入重点原因" value="{{ child.keyReason }}" bindinput="onKeyReasonInput" />
+    </view>
+    
+    <view class="form-actions">
+      <button class="btn btn-secondary" bindtap="onCancel">取消</button>
+      <button class="btn btn-primary" bindtap="onSubmit" loading="{{ loading }}">提交</button>
+    </view>
+  </view>
+</view>

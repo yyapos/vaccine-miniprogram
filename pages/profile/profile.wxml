@@ -1,0 +1,46 @@
+<view class="container">
+  <!-- 用户信息卡片 -->
+  <view class="user-card">
+    <image 
+      class="avatar" 
+      src="{{ userInfo.avatar || 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgdmlld0JveD0iMCAwIDEwMCAxMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CiAgPGNpcmNsZSBjeD0iNTAiIGN5PSI1MCIgcj0iNDgiIGZpbGw9IiNlNWU3ZWIiLz4KICA8Y2lyY2xlIGN4PSI1MCIgY3k9IjQ1IiByPSIyMCIgZmlsbD0iI2RkZCIvPgogIDxjaXJjbGUgY3g9IjQwIiBjeT0iNTUiIHI9IjMiIGZpbGw9IiNkZGQiLz4KICA8Y2lyY2xlIGN4PSI2MCIgY3k9IjU1IiByPSIzIiBmaWxsPSIjZGRkIi8+CiAgPHBhdGggZD0iTTM1IDc4IFE1MCA4NSA2NSA3OCIgc3Ryb2tlPSIjZGRkIiBzdHJva2Utd2lkdGg9IjMiIGZpbGw9Im5vbmUiLz4KPC9zdmc+' }}" 
+      mode="aspectFill">
+    </image>
+    <view class="user-info">
+      <view class="nickname">{{ userInfo.nickname || '微信用户' }}</view>
+      <view class="phone">{{ userInfo.phone || '未绑定手机号' }}</view>
+    </view>
+  </view>
+
+  <!-- 功能列表 -->
+  <view class="function-list">
+    <view class="function-item" bindtap="handleAbout">
+      <view class="function-icon">ℹ️</view>
+      <view class="function-text">关于我们</view>
+      <view class="function-arrow">›</view>
+    </view>
+    
+    <view class="function-item" bindtap="handleContact">
+      <view class="function-icon">📞</view>
+      <view class="function-text">联系客服</view>
+      <view class="function-arrow">›</view>
+    </view>
+    
+    <view class="function-item" bindtap="handleCheckUpdate">
+      <view class="function-icon">🔄</view>
+      <view class="function-text">检查更新</view>
+      <view class="function-arrow">›</view>
+    </view>
+    
+    <view class="function-item" bindtap="handleLogout">
+      <view class="function-icon">🚪</view>
+      <view class="function-text logout-text">退出登录</view>
+      <view class="function-arrow">›</view>
+    </view>
+  </view>
+
+  <!-- 版本信息 -->
+  <view class="version-info">
+    <text>疫苗预约小程序 v1.0.0</text>
+  </view>
+</view>
