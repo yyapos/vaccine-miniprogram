@@ -4,7 +4,8 @@ Page({
   data: {
     appointmentId: null,
     appointment: null,
-    loading: true
+    loading: true,
+    canCancel: false
   },
 
   onLoad(options) {
@@ -28,8 +29,14 @@ Page({
     this.setData({ loading: true });
     
     http.get(API.GET_APPOINTMENT_DETAIL + id).then(res => {
+      const appointment = res.data || {};
       this.setData({
-        appointment: res.data,
+        appointment: {
+          ...appointment,
+          statusText: this.getStatusText(appointment.status),
+          statusIcon: this.getStatusIcon(appointment.status)
+        },
+        canCancel: this.canCancelAppointment(appointment.status),
         loading: false
       });
     }).catch(err => {
@@ -73,10 +80,36 @@ Page({
       wx.hideLoading();
       console.error("取消预约失败:", err);
       wx.showToast({
-        title: "取消失败",
+        title: err.message || "取消失败",
         icon: "none"
       });
     });
+  },
+
+  canCancelAppointment(status) {
+    return status === 0 || status === 1;
+  },
+
+  getStatusText(status) {
+    const map = {
+      0: "待审核",
+      1: "已通过",
+      2: "已拒绝",
+      3: "已完成",
+      4: "已取消"
+    };
+    return map[status] || "未知";
+  },
+
+  getStatusIcon(status) {
+    const map = {
+      0: "⏳",
+      1: "✅",
+      2: "❌",
+      3: "✅",
+      4: "🚫"
+    };
+    return map[status] || "❓";
   },
 
   // 重新预约

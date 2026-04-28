@@ -5,7 +5,7 @@ Page({
     city: "",
     avatar: "",         // 用户头像
     nickname: "",        // 用户昵称
-    baseUrl: "http://10.180.229.200:9000/api" // API基础路径
+    baseUrl: "http://localhost:9000/api" // API基础路径
   },
 
   // 选择头像

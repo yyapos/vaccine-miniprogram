@@ -44,6 +44,10 @@
   background: linear-gradient(135deg, #43E97B 0%, #38F9D7 100%);
 }
 
+.status-4 {
+  background: linear-gradient(135deg, #A18CD1 0%, #FBC2EB 100%);
+}
+
 .status-icon {
   font-size: 120rpx;
   margin-bottom: 20rpx;

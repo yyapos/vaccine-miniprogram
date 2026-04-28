@@ -9,8 +9,8 @@
   <view wx:else>
     <!-- 状态卡片 -->
     <view class="status-card status-{{ appointment.status }}">
-      <view class="status-icon">{{ appointment.status === 0 ? '⏳' : appointment.status === 1 ? '✅' : appointment.status === 2 ? '❌' : '✅' }}</view>
-      <view class="status-text">{{ appointment.status === 0 ? '待审核' : appointment.status === 1 ? '已通过' : appointment.status === 2 ? '已拒绝' : '已完成' }}</view>
+      <view class="status-icon">{{ appointment.statusIcon }}</view>
+      <view class="status-text">{{ appointment.statusText }}</view>
     </view>
 
     <!-- 预约信息 -->
@@ -71,18 +71,18 @@
     </view>
 
     <!-- 审核信息 -->
-    <view class="card" wx:if="{{ appointment.status === 1 || appointment.status === 2 }}">
+    <view class="card" wx:if="{{ appointment.status === 1 || appointment.status === 2 || appointment.status === 4 }}">
       <view class="card-title">审核信息</view>
       <view class="info-item">
-        <view class="info-label">审核结果</view>
-        <view class="info-value">{{ appointment.status === 1 ? '通过' : '拒绝' }}</view>
+        <view class="info-label">{{ appointment.status === 4 ? '处理结果' : '审核结果' }}</view>
+        <view class="info-value">{{ appointment.status === 1 ? '通过' : appointment.status === 2 ? '拒绝' : '已取消' }}</view>
       </view>
       <view class="info-item" wx:if="{{ appointment.cancelReason }}">
-        <view class="info-label">{{ appointment.status === 2 ? '拒绝原因' : '备注' }}</view>
+        <view class="info-label">{{ appointment.status === 2 ? '拒绝原因' : '取消原因' }}</view>
         <view class="info-value">{{ appointment.cancelReason }}</view>
       </view>
       <view class="info-item" wx:if="{{ appointment.updateTime }}">
-        <view class="info-label">审核时间</view>
+        <view class="info-label">{{ appointment.status === 4 ? '取消时间' : '审核时间' }}</view>
         <view class="info-value">{{ appointment.updateTime }}</view>
       </view>
     </view>
@@ -107,7 +107,7 @@
     <!-- 操作按钮 -->
     <view class="action-buttons">
       <button 
-        wx:if="{{ appointment.status === 0 }}" 
+        wx:if="{{ canCancel }}" 
         class="btn btn-danger" 
         bindtap="cancelAppointment">
         取消预约

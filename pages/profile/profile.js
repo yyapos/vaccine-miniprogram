@@ -54,7 +54,7 @@ Page({
   // 联系客服
   handleContact() {
     wx.makePhoneCall({
-      phoneNumber: '12345678900',
+      phoneNumber: '15512725316',
       success: () => {
         console.log('拨打电话成功');
       },

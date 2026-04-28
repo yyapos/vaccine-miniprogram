@@ -1,5 +1,5 @@
 // API 配置文件
-const BASE_URL = "http://10.180.229.200:9000/api"; // 网关地址
+const BASE_URL = "http://localhost:9000/api"; // 网关地址
 
 // API 接口地址
 const API = {

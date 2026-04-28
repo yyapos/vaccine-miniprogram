@@ -3,7 +3,7 @@ App({
     userInfo: null,
     token: null,
     children: [],
-    apiUrl: "http://10.180.229.200:9000/api", // 网关地址
+    apiUrl: "http://localhost:9000/api", // 网关地址
   },
   
   onLaunch() {
